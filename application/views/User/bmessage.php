@@ -1,0 +1,113 @@
+
+  <?php include "include/header.php";?>
+  <!-- Navbar -->
+  <?php include "include/navbar.php";?>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  
+  <!-- Aside -->
+  <?php include "include/aside.php";?>
+  <!-- Aside -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Message</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">List Messages</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+          <!-- connect -->
+  <?php include "include/conn.php";?>
+  <!-- connect -->
+    <!-- Main content -->
+   <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+         <h3 class="card-title"><!--<a href="<?php //echo base_url(); ?>index.php/admin/addstaff"><input type="submit" value="Add Staff" class="btn btn-success float-right"></a>--></h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 1%">#</th>
+                      <th style="width: 15%">Message To</th>
+                      <th style="width: 30%">Message</th>
+                      <th style="width: 35%">Reply</th>
+                     <!-- <th style="width: 10%"></th>-->
+                      
+                  </tr>
+              </thead>
+              <tbody>
+              <?php 
+				  $i=1;
+				  foreach($data as $row)
+				  { ?>
+                  <tr>
+                      <td><?php echo $i; ?></td>
+                      <td><a>
+					  <?php $v_id=$row->v_id; 
+					  $qry = "select * from `vet` WHERE v_id='$v_id'";
+                      $res = mysql_query($qry);
+					  $rw=mysql_fetch_array($res);
+					  echo $rw['name'];
+					  ?>
+                       <?php $t_id=$row->t_id; 
+					  $qry = "select * from `trainer` WHERE t_id='$t_id'";
+                      $res = mysql_query($qry);
+					  $rw=mysql_fetch_array($res);
+					  echo $rw['name'];
+					  ?>
+                         <?php $bd_id=$row->bd_id; 
+					  $qry = "select * from `boarding` WHERE bd_id='$bd_id'";
+                      $res = mysql_query($qry);
+					  $rw=mysql_fetch_array($res);
+					  echo $rw['name'];
+					  ?></a></td>
+                      <td><?php echo $row->message; ?></td>
+                      <td><?php echo $row->reply; ?></td>
+                     <!-- <td><a href="<?php echo base_url(); ?>index.php/Boarding/addreply?mes_id=<?php echo $row->mes_id; ?>"><input type="submit" value="Add Reply" class="btn btn-success"></a></td> -->
+                  </tr>
+                  <?php
+                  $i++;
+				  }
+				 ?>
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  
+  <!-- /.content-wrapper -->
+  
+     <!-- Footer -->
+    <?php include "include/footer.php";?>
+    <!-- /.footer -->
+
+<!-- ./wrapper -->
